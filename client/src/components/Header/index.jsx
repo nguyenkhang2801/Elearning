@@ -3,7 +3,7 @@ import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
-import React, { Component } from "react";
+import React, { Component, useEffect } from "react";
 import Box from "@material-ui/core/Box";
 import { Add, Input } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
@@ -19,6 +19,7 @@ import {
   LinearProgress,
 } from "@material-ui/core";
 import LoginForm from "../LoginForm";
+import Axios from "axios";
 
 const handleAddClick = () => {
   return (
@@ -55,6 +56,21 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
+const handleSubmit = (e) => {
+  e.preventDefault();
+  let request = {
+    username: document.getElementById("name").value,
+    password: document.getElementById("pass").value,
+  };
+  // let route = "http://localhost:3001/api/login";
+  // route += "?id=" + request.username;
+  // console.log(route);
+
+  Axios.get(`api/login?${request.username}`).then((result) => {
+    console.log(result);
+  });
+};
+
 export default function Header() {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
@@ -64,7 +80,7 @@ export default function Header() {
   };
 
   const handleClose = () => {
-    session.username = setOpen(false);
+    setOpen(false);
   };
   return (
     <div className={classes.root}>
@@ -124,33 +140,36 @@ export default function Header() {
               onClose={handleClose}
               aria-labelledby="form-dialog-title"
             >
-              <DialogTitle id="form-dialog-title">Sign in</DialogTitle>
-              <DialogContent>
-                <DialogContentText>
-                  To get into this website, must be sign in first
-                </DialogContentText>
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="name"
-                  label="Username"
-                  type="text"
-                  fullWidth
-                />
-                <TextField
-                  autoFocus
-                  margin="dense"
-                  id="name"
-                  label="Password"
-                  type="password"
-                  fullWidth
-                />
-              </DialogContent>
-              <DialogActions>
-                <Button onClick={handleClose} color="primary">
-                  Log in
-                </Button>
-              </DialogActions>
+              <form onSubmit={(e) => handleSubmit(e)}>
+                <DialogTitle id="form-dialog-title">Sign in</DialogTitle>
+
+                <DialogContent>
+                  <DialogContentText>
+                    To get into this website, must be sign in first
+                  </DialogContentText>
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="name"
+                    label="Username"
+                    type="text"
+                    fullWidth
+                  />
+                  <TextField
+                    autoFocus
+                    margin="dense"
+                    id="pass"
+                    label="Password"
+                    type="password"
+                    fullWidth
+                  />
+                </DialogContent>
+                <DialogActions>
+                  <Button type="submit" onClick={handleClose} color="primary">
+                    Log in
+                  </Button>
+                </DialogActions>
+              </form>
             </Dialog>
           </Box>
         </Toolbar>

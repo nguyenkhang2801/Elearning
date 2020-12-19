@@ -23,6 +23,15 @@ app.get("/api/getstudentinfo", (req, res) => {
   });
 });
 
+app.get("/api/login", (req, res) => {
+  console.log(req);
+  const sqlSelect = "SELECT * FROM student where StudentID=?;";
+  db.query(sqlSelect, +[req.username], (err, result) => {
+    console.log(result);
+    res.send(result);
+  });
+});
+
 app.listen(3001, () => {
   console.log("running on port 3001");
 });
