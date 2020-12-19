@@ -65,10 +65,15 @@ const handleSubmit = (e) => {
   // let route = "http://localhost:3001/api/login";
   // route += "?id=" + request.username;
   // console.log(route);
-
-  Axios.get(`api/login?${request.username}`).then((result) => {
-    console.log(result);
-  });
+  console.log(request); // okay
+  Axios.get(`http://localhost:3001/api/login?id=${request.username}`)
+    .then((result) => {
+      console.log(result.data); //okay
+      localStorage.setItem("id", `${request.username}`);
+    })
+    .catch((error) => {
+      console.log(error);
+    });
 };
 
 export default function Header() {

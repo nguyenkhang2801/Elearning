@@ -8,7 +8,7 @@ const db = mysql.createPool({
   host: "localhost",
   user: "root",
   password: "",
-  database: "ass_1512",
+  database: "1912",
 });
 
 app.use(cors());
@@ -16,19 +16,29 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/api/getstudentinfo", (req, res) => {
-  const sqlSelect = "SELECT * FROM student;";
-  db.query(sqlSelect, (err, result) => {
-    console.log(result);
+  const sqlSelect = "SELECT * FROM student where StudentID=?;";
+  db.query(sqlSelect, +[req.query.id], (err, result) => {
     res.send(result);
   });
 });
 
 app.get("/api/login", (req, res) => {
-  console.log(req);
   const sqlSelect = "SELECT * FROM student where StudentID=?;";
-  db.query(sqlSelect, +[req.username], (err, result) => {
-    console.log(result);
-    res.send(result);
+  db.query(sqlSelect, +[req.query.id], (err, result) => {
+    if (result.length > 0) {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
+app.get("/api/getstudentsubject", (req, res) => {
+  const sqlSelect = "SELECT ClassId FROM student where StudentID=?;";
+  db.query(sqlSelect, +[req.query.id], (err, result) => {
+    if (result.length > 0) {
+      console.log(result);
+      res.send(result);
+    }
   });
 });
 

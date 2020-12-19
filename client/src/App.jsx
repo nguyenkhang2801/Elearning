@@ -3,9 +3,10 @@ import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
 import Home from "./features/Home";
 import MyPage from "./features/MyPage";
-import Register from "./features/Register";
 import MyInfo from "./features/MyInfo";
+import Register from "./features/Register";
 import NotFound from "./components/NotFound";
+
 function App() {
   return (
     <div>
