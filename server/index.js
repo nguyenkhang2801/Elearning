@@ -32,8 +32,9 @@ app.get("/api/login", (req, res) => {
   });
 });
 
-app.get("/api/getstudentsubject", (req, res) => {
-  const sqlSelect = "SELECT ClassId FROM student where StudentID=?;";
+app.get("/api/getstudentclass", (req, res) => {
+  const sqlSelect =
+    "SELECT t.ClassId,  c.CSubjectId,c.MainTeacher,c.CFalcility,c.CBuilding,c.CRoom FROM TAKECLASS as t, CLASS as c where StudentID=1810375 AND t.ClassId = c.ClassId;";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
     if (result.length > 0) {
       console.log(result);

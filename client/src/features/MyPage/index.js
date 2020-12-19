@@ -7,16 +7,16 @@ MyPage.propTypes = {};
 let id = localStorage.getItem("id");
 
 function MyPage(props) {
-  const [studentSubject, setStudentSubject] = useState([]);
+  const [studentClassInfo, setStudentClassInfo] = useState([]);
   useEffect(() => {
-    Axios.get(`http://localhost:3001/api/getstudentsubject?id=${id}`).then(
+    Axios.get(`http://localhost:3001/api/getstudentclass?id=${id}`).then(
       (response) => {
-        setStudentSubject(response.data);
+        setStudentClassInfo(response.data); //okay
       }
     );
-  }, [studentSubject]);
+  }, [studentClassInfo]);
 
-  return <div>My Page</div>;
+  return <div></div>;
 }
 
 export default MyPage;
