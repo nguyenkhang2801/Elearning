@@ -3,11 +3,6 @@ import Axios from "axios";
 import { Box } from "@material-ui/core";
 
 function MyInfo() {
-  const [studentId, setStudentId] = useState("");
-  const [studentName, setStudentName] = useState("");
-  const [studentFalcuty, setStudentFalcuty] = useState("");
-  const [grade, setGrade] = useState("");
-  const [stateOfStudy, setSTateOfStudy] = useState("");
   const [studentInfo, setStudentInfo] = useState([]);
 
   let id = localStorage.getItem("id");

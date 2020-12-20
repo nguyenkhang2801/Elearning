@@ -13,20 +13,12 @@ import { ListAlt, ListALt } from "@material-ui/icons";
 
 MyPage.propTypes = {};
 
-let id = localStorage.getItem("id");
-
 function MyPage(props) {
+  const [id, setId] = useState(localStorage.getItem("id"));
+  const [studentClasses, setStudentClasses] = useState([]);
   const [open, setOpen] = React.useState(false);
   //dialog handle
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
 
-  const handleClose = () => {
-    setOpen(false);
-  };
-
-  const [studentClasses, setStudentClasses] = useState([]);
   useEffect(() => {
     Axios.get(`http://localhost:3001/api/getstudentclass?id=${id}`).then(
       (response) => {
@@ -34,6 +26,15 @@ function MyPage(props) {
       }
     );
   }, [id]);
+  console.log(studentClasses);
+
+  const handleClickOpen = () => {
+    setOpen(true);
+  };
+
+  const handleClose = () => {
+    setOpen(false);
+  };
 
   return (
     <div>
