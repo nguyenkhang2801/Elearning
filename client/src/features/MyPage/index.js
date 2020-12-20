@@ -15,6 +15,7 @@ MyPage.propTypes = {};
 
 function MyPage(props) {
   const [id, setId] = useState(localStorage.getItem("id"));
+  console.log(id);
   const [studentClasses, setStudentClasses] = useState([]);
   const [open, setOpen] = React.useState(false);
   //dialog handle
@@ -28,11 +29,13 @@ function MyPage(props) {
   }, [id]);
   console.log(studentClasses);
 
-  const handleClickOpen = () => {
+  const handleClickOpen = (e) => {
+    e.stopPropagation();
     setOpen(true);
   };
 
-  const handleClose = () => {
+  const handleClose = (e) => {
+    e.stopPropagation();
     setOpen(false);
   };
 
@@ -46,14 +49,14 @@ function MyPage(props) {
               <Button
                 variant="contained"
                 color="secondary"
-                onClick={handleClickOpen}
+                onClick={(e) => handleClickOpen(e)}
                 startIcon={<ListAlt />}
               >
                 Detail
               </Button>
               <Dialog
                 open={open}
-                onClose={handleClose}
+                onClose={(e) => handleClose(e)}
                 aria-labelledby="form-dialog-title"
               >
                 <DialogTitle id="form-dialog-title">
@@ -85,9 +88,6 @@ function MyPage(props) {
                 <DialogActions>
                   <Button onClick={handleClose} color="primary">
                     Cancel
-                  </Button>
-                  <Button onClick={handleClose} color="primary">
-                    Subscribe
                   </Button>
                 </DialogActions>
               </Dialog>

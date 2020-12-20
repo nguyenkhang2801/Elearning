@@ -14,7 +14,7 @@ function MyInfo() {
         setStudentInfo(response.data);
       }
     );
-  }, [studentInfo]);
+  }, [id]);
 
   return (
     <div className="App">
