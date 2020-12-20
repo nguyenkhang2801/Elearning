@@ -44,7 +44,18 @@ app.get("/api/getstudentclass", (req, res) => {
 });
 
 app.get("/api/getstudentregister", (req, res) => {
-  const sqlSelect = "SELECT * FROM student where StudentID=?;";
+  const sqlSelect =
+    "SELECT s.SubjectId, s.SubjectName, s.CollegeCredit, s.SJFacultyId, c.ClassId,c.NumberOfStudent,c.MainTeacher FROM subject as s, student as stu, class as c where StudentID=? AND s.SJFacultyId=stu.SFacultyId AND s.SubjectId=c.CSubjectId;";
+  db.query(sqlSelect, +[req.query.id], (err, result) => {
+    if (result.length > 0) {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
+app.get("/api/getstudentremove", (req, res) => {
+  const sqlSelect = "";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
     if (result.length > 0) {
       console.log(result);

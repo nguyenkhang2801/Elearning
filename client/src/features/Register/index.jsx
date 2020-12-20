@@ -5,7 +5,7 @@ import Axios from "axios";
 Register.propTypes = {};
 
 function Register(props) {
-  return <div>Register</div>;
+  return <div></div>;
 }
 
 export default Register;

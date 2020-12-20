@@ -161,7 +161,6 @@ export default function Header() {
                     fullWidth
                   />
                   <TextField
-                    autoFocus
                     margin="dense"
                     id="pass"
                     label="Password"
