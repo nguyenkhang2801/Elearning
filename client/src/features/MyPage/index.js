@@ -11,6 +11,8 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { ListAlt, ListALt } from "@material-ui/icons";
 
+import ButtonInfo from "./ButtonInfo";
+
 MyPage.propTypes = {};
 
 function MyPage(props) {
@@ -29,70 +31,21 @@ function MyPage(props) {
   }, [id]);
   console.log(studentClasses);
 
-  const handleClickOpen = (e) => {
-    e.stopPropagation();
-    setOpen(true);
-  };
+  // const handleClickOpen = (e) => {
+  //   e.stopPropagation();
+  //   setOpen(true);
+  // };
 
-  const handleClose = (e) => {
-    e.stopPropagation();
-    setOpen(false);
-  };
+  // const handleClose = (e) => {
+  //   e.stopPropagation();
+  //   setOpen(false);
+  // };
 
   return (
     <div>
       <ul className="studentClassInfo">
         {studentClasses.map((studentClass) => (
-          <li key={studentClass.ClassId}>
-            <Box>
-              <p>{studentClass.SubjectName}</p>
-              <Button
-                variant="contained"
-                color="secondary"
-                onClick={(e) => handleClickOpen(e)}
-                startIcon={<ListAlt />}
-              >
-                Detail
-              </Button>
-              <Dialog
-                open={open}
-                onClose={(e) => handleClose(e)}
-                aria-labelledby="form-dialog-title"
-              >
-                <DialogTitle id="form-dialog-title">
-                  {studentClass.SubjectName}
-                </DialogTitle>
-                <DialogContent>
-                  <DialogContentText>
-                    Class Id: {studentClass.ClassId}
-                  </DialogContentText>
-                  <DialogContentText>
-                    Subject Id: {studentClass.CSubjectId}
-                  </DialogContentText>
-                  <DialogContentText>
-                    Credit: {studentClass.CollegeCredit}
-                  </DialogContentText>
-                  <DialogContentText>
-                    Main Teacher: {studentClass.MainTeacher}
-                  </DialogContentText>
-                  <DialogContentText>
-                    Falcility: {studentClass.CFalcility}
-                  </DialogContentText>
-                  <DialogContentText>
-                    Building: {studentClass.CBuilding}
-                  </DialogContentText>
-                  <DialogContentText>
-                    Room: {studentClass.CRoom}
-                  </DialogContentText>
-                </DialogContent>
-                <DialogActions>
-                  <Button onClick={handleClose} color="primary">
-                    Cancel
-                  </Button>
-                </DialogActions>
-              </Dialog>
-            </Box>
-          </li>
+          <ButtonInfo studentClass={studentClass} />
         ))}
       </ul>
     </div>

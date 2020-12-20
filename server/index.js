@@ -43,6 +43,16 @@ app.get("/api/getstudentclass", (req, res) => {
   });
 });
 
+app.get("/api/getstudentregister", (req, res) => {
+  const sqlSelect = "SELECT * FROM student where StudentID=?;";
+  db.query(sqlSelect, +[req.query.id], (err, result) => {
+    if (result.length > 0) {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
 app.listen(3001, () => {
   console.log("running on port 3001");
 });
