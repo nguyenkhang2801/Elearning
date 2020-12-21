@@ -32,9 +32,10 @@ app.get("/api/login", (req, res) => {
   });
 });
 
+//get the subject that the student registered by student ID/2010742 /
 app.get("/api/getstudentclass", (req, res) => {
   const sqlSelect =
-    "SELECT t.ClassId,  c.CSubjectId,c.MainTeacher,c.CFalcility,c.CBuilding,c.CRoom,s.SubjectName,s.CollegeCredit FROM TAKECLASS as t, CLASS as c, SUBJECT as s where StudentID=? AND t.ClassId = c.ClassId AND s.SubjectId=c.CSubjectId;";
+    "SELECT t.ClassId,  c.CSubjectId,c.MainTeacher,c.CFalcility,c.CBuilding,c.CRoom,s.SubjectName,s.CollegeCredit FROM TAKECLASS as t, CLASS as c, SUBJECT as s where t.StudentID=? AND t.ClassId = c.ClassId AND s.SubjectId=c.CSubjectId;";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
     if (result.length > 0) {
       console.log(result);
@@ -43,9 +44,10 @@ app.get("/api/getstudentclass", (req, res) => {
   });
 });
 
-app.get("/api/getstudentregister", (req, res) => {
+//get all class of a subject with subject id
+app.get("/api/getsubjectsearch", (req, res) => {
   const sqlSelect =
-    "SELECT s.SubjectId, s.SubjectName, s.CollegeCredit, s.SJFacultyId, c.ClassId,c.NumberOfStudent,c.MainTeacher FROM subject as s, student as stu, class as c where StudentID=? AND s.SJFacultyId=stu.SFacultyId AND s.SubjectId=c.CSubjectId;";
+    "SELECT subject.SubjectId, subject.SubjectName, subject.CollegeCredit, class.ClassId,class.CFalcility,class.MainTeacher,class.NumberOfStudent FROM subject , class where class.CSubjectId=? AND subject.SubjectId = class.CSubjectId;";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
     if (result.length > 0) {
       console.log(result);
@@ -54,15 +56,15 @@ app.get("/api/getstudentregister", (req, res) => {
   });
 });
 
-app.get("/api/getstudentremove", (req, res) => {
-  const sqlSelect = "";
-  db.query(sqlSelect, +[req.query.id], (err, result) => {
-    if (result.length > 0) {
-      console.log(result);
-      res.send(result);
-    }
-  });
-});
+// app.get("/api/getstudentremove", (req, res) => {
+//   const sqlSelect = "";
+//   db.query(sqlSelect, +[req.query.id], (err, result) => {
+//     if (result.length > 0) {
+//       console.log(result);
+//       res.send(result);
+//     }
+//   });
+// });
 
 app.listen(3001, () => {
   console.log("running on port 3001");
