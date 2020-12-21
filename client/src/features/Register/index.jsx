@@ -24,25 +24,33 @@ function Register() {
   const classes = useStyles();
 
   const [studentId, setId] = useState(localStorage.getItem("id"));
+  const [subjectId, setSubjectId] = useState(-1);
+  const handleChangeSubjectId = (e) => {
+    setSubjectId(+e.target.value);
+    console.log(e.target.value);
+    console.log(subjectId);
+  };
   const [searchSubjectClass, setSearchSubjectClass] = useState([]);
   //dialog handle
 
-  //get all subject of falcuty
-  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
-  // useEffect(() => {
-  //   Axios.get(
-  //     `http://localhost:3001/api/getsubjectsearch?subjectid=${subjectId}`
-  //   ).then((response) => {
-  //     setSearchSubjectClass(response.data); //okay
-  //   });
-  // }, [subjectId]);
+  //get all class search for subject
+
+  useEffect(() => {
+    Axios.get(
+      `http://localhost:3001/api/getsubjectsearch?subjectId=${1004}`
+    ).then((response) => {
+      console.log(response.data);
+      setSearchSubjectClass(response.data); //ủa chạy được mà ta????
+    });
+  }, [subjectId]);
 
   //get all subject that student registered
   const [studentClasses, setStudentClasses] = useState([]);
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/api/getstudentclass?id=${studentId}`).then(
+    Axios.get(`http://localhost:3001/api/getstudentclass?id=${2010742}`).then(
       (response) => {
+        //console.log(response.data);
         setStudentClasses(response.data); //okay
       }
     );
@@ -54,16 +62,23 @@ function Register() {
 
   return (
     <div>
-      {/* <form className={classes.root} noValidate autoComplete="off">
+      <form className={classes.root} noValidate autoComplete="off">
         <form onSubmit={(e) => handleSubmit(e)}>
           <Box>
-            <TextField id="standard-basic" label="Enter Subject ID" />
+            <TextField
+              id="standard-basic"
+              label="Enter Subject ID"
+              onChange={(e) => {
+                handleChangeSubjectId(e);
+              }}
+            />
+            {/* bỏ kết quả search vô đây */}
             <Button type="submit" color="secondary" variant="contained">
               Submit
             </Button>
           </Box>
         </form>
-      </form> */}
+      </form>
     </div>
   );
 }

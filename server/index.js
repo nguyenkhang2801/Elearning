@@ -50,7 +50,7 @@ app.get("/api/getstudentclass", (req, res) => {
 app.get("/api/getsubjectsearch", (req, res) => {
   const sqlSelect =
     "SELECT subject.SubjectId, subject.SubjectName, subject.CollegeCredit, class.ClassId,class.CFalcility,class.MainTeacher,class.NumberOfStudent FROM subject , class where class.CSubjectId=? AND subject.SubjectId = class.CSubjectId;";
-  db.query(sqlSelect, +[req.query.id], (err, result) => {
+  db.query(sqlSelect, +[req.query.subjectId], (err, result) => {
     if (result.length > 0) {
       console.log(result);
       res.send(result);
