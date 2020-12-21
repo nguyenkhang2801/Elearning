@@ -45,7 +45,9 @@ function MyPage(props) {
     <div>
       <ul className="studentClassInfo">
         {studentClasses.map((studentClass) => (
-          <ButtonInfo studentClass={studentClass} />
+          <li key={studentClass.ClassId}>
+            <ButtonInfo studentClass={studentClass} />
+          </li>
         ))}
       </ul>
     </div>

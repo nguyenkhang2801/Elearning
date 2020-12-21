@@ -21,54 +21,52 @@ function ButtonInfo(props) {
   };
 
   return (
-    <li key={studentClass.ClassId}>
-      <Box>
-        <p>{studentClass.SubjectName}</p>
-        <Button
-          variant="contained"
-          color="secondary"
-          onClick={(e) => handleClickOpen()}
-          startIcon={<ListAlt />}
-        >
-          Detail
-        </Button>
-        <Dialog
-          open={open}
-          onClose={(e) => handleClose()}
-          aria-labelledby="form-dialog-title"
-        >
-          <DialogTitle id="form-dialog-title">
-            {studentClass.SubjectName}
-          </DialogTitle>
-          <DialogContent>
-            <DialogContentText>
-              Class Id: {studentClass.ClassId}
-            </DialogContentText>
-            <DialogContentText>
-              Subject Id: {studentClass.CSubjectId}
-            </DialogContentText>
-            <DialogContentText>
-              Credit: {studentClass.CollegeCredit}
-            </DialogContentText>
-            <DialogContentText>
-              Main Teacher: {studentClass.MainTeacher}
-            </DialogContentText>
-            <DialogContentText>
-              Falcility: {studentClass.CFalcility}
-            </DialogContentText>
-            <DialogContentText>
-              Building: {studentClass.CBuilding}
-            </DialogContentText>
-            <DialogContentText>Room: {studentClass.CRoom}</DialogContentText>
-          </DialogContent>
-          <DialogActions>
-            <Button onClick={handleClose} color="primary">
-              Cancel
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </Box>
-    </li>
+    <Box>
+      <p>{studentClass.SubjectName}</p>
+      <Button
+        variant="contained"
+        color="secondary"
+        onClick={(e) => handleClickOpen()}
+        startIcon={<ListAlt />}
+      >
+        Detail
+      </Button>
+      <Dialog
+        open={open}
+        onClose={(e) => handleClose()}
+        aria-labelledby="form-dialog-title"
+      >
+        <DialogTitle id="form-dialog-title">
+          {studentClass.SubjectName}
+        </DialogTitle>
+        <DialogContent>
+          <DialogContentText>
+            Class Id: {studentClass.ClassId}
+          </DialogContentText>
+          <DialogContentText>
+            Subject Id: {studentClass.CSubjectId}
+          </DialogContentText>
+          <DialogContentText>
+            Credit: {studentClass.CollegeCredit}
+          </DialogContentText>
+          <DialogContentText>
+            Main Teacher: {studentClass.MainTeacher}
+          </DialogContentText>
+          <DialogContentText>
+            Falcility: {studentClass.CFalcility}
+          </DialogContentText>
+          <DialogContentText>
+            Building: {studentClass.CBuilding}
+          </DialogContentText>
+          <DialogContentText>Room: {studentClass.CRoom}</DialogContentText>
+        </DialogContent>
+        <DialogActions>
+          <Button onClick={handleClose} color="primary">
+            Cancel
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </Box>
   );
 }
 
