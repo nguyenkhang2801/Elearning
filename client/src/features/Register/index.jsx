@@ -24,17 +24,18 @@ function Register() {
   const classes = useStyles();
 
   const [studentId, setId] = useState(localStorage.getItem("id"));
-  const [studentRegisterList, setStudentRegisterList] = useState([]);
+  const [searchSubjectClass, setSearchSubjectClass] = useState([]);
   //dialog handle
 
   //get all subject of falcuty
-  useEffect(() => {
-    Axios.get(
-      `http://localhost:3001/api/getstudentregister?id=${studentId}`
-    ).then((response) => {
-      setStudentRegisterList(response.data); //okay
-    });
-  }, [studentId]);
+  //+++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+  // useEffect(() => {
+  //   Axios.get(
+  //     `http://localhost:3001/api/getsubjectsearch?subjectid=${subjectId}`
+  //   ).then((response) => {
+  //     setSearchSubjectClass(response.data); //okay
+  //   });
+  // }, [subjectId]);
 
   //get all subject that student registered
   const [studentClasses, setStudentClasses] = useState([]);
@@ -53,7 +54,7 @@ function Register() {
 
   return (
     <div>
-      <form className={classes.root} noValidate autoComplete="off">
+      {/* <form className={classes.root} noValidate autoComplete="off">
         <form onSubmit={(e) => handleSubmit(e)}>
           <Box>
             <TextField id="standard-basic" label="Enter Subject ID" />
@@ -62,7 +63,7 @@ function Register() {
             </Button>
           </Box>
         </form>
-      </form>
+      </form> */}
     </div>
   );
 }
