@@ -29,7 +29,7 @@ app.get("/api/login", (req, res) => {
 
 app.get("/api/getstudentinfo", (req, res) => {
   const sqlSelect = "SELECT * FROM student where StudentID=?;";
-  db.query(sqlSelect, +[req.query.id], (err, result) => {
+  db.query(sqlSelect, [+req.query.id], (err, result) => {
     res.send(result);
   });
 });
@@ -49,13 +49,24 @@ app.get("/api/getstudentclass", (req, res) => {
 //get all class of a subject with subject id
 app.get("/api/getsubjectsearch", (req, res) => {
   const sqlSelect =
-    "SELECT subject.SubjectId, subject.SubjectName, subject.CollegeCredit, class.ClassId,class.CFalcility,class.MainTeacher,class.NumberOfStudent FROM subject , class where class.CSubjectId=? AND subject.SubjectId = class.CSubjectId;";
+    "SELECT subject.SubjectId, subject.SubjectName, subject.CollegeCredit, class.ClassId,class.CFalcility,class.MainTeacher,class.NumberOfStudent,TeacherName FROM subject , class,teacher where MainTeacher= TeacherId AND class.CSubjectId=? AND subject.SubjectId = class.CSubjectId;";
   db.query(sqlSelect, +[req.query.subjectId], (err, result) => {
     if (result.length > 0) {
       console.log(result);
       res.send(result);
     }
   });
+});
+
+//insert student into class
+app.post("/api/insertStudentIntoClass", (req, res) => {
+  const sqlInsert =
+    "INSERT INTO TakeClass (StudentId,ClassId,SemesterId) VALUES (?,?,201);"; //lệnh đúng rồi
+  db.query(
+    sqlInsert,
+    [+req.query.studentId, +req.query.classId],
+    (err, result) => {}
+  );
 });
 
 //teacher command ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
