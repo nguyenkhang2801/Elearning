@@ -50,16 +50,16 @@ function Register() {
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/api/getstudentclass?id=${studentId}`).then(
+      //okay
       (response) => {
-        console.log("class registerd", response.data);
         setStudentClasses(response.data); //okay
       }
     );
   }, [studentId]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
     //check if subject has registered
+    console.log(subjectId);
     if (studentClasses.some((x) => x.CSubjectId === subjectId)) {
       alert("You've already register this subject");
       return;
