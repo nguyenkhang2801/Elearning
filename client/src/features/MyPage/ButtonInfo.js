@@ -22,6 +22,7 @@ function ButtonInfo(props) {
 
   return (
     <Box>
+      <p>{studentClass.SubjectName}</p>
       <Button
         variant="contained"
         color="secondary"
