@@ -16,15 +16,29 @@ app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
 app.get("/api/getstudentinfo", (req, res) => {
-  const sqlSelect = "SELECT * FROM student where StudentID=?;";
+  const sqlSelect = "SELECT * FROM teacher where StudentID=?;";
+  db.query(sqlSelect, +[req.query.id], (err, result) => {
+    res.send(result);
+  });
+});
+
+app.get("/api/getteacherinfo", (req, res) => {
+  const sqlSelect = "SELECT * FROM teacher where TeacherId=?;";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
     res.send(result);
   });
 });
 
 app.get("/api/login", (req, res) => {
-  const sqlSelect = "SELECT * FROM student where StudentID=?;";
-  db.query(sqlSelect, +[req.query.id], (err, result) => {
+  let sqlSelect = '';
+  const id = req.query.id;
+  if(100 <= id && id <= 999){  
+    sqlSelect = "SELECT * FROM teacher where TeacherId=?;";
+  }
+  else {
+    sqlSelect = "SELECT * FROM student where StudentID=?;";
+  }
+  db.query(sqlSelect, +[id], (err, result) => {
     if (result.length > 0) {
       console.log(result);
       res.send(result);
@@ -39,6 +53,30 @@ app.get("/api/getstudentclass", (req, res) => {
   db.query(sqlSelect, +[req.query.id], (err, result) => {
     if (result.length > 0) {
       console.log(result);
+      res.send(result);
+    }
+  });
+});
+
+// Get student in classId
+app.get("/api/getstudentinclass", (req, res) => {
+  const sqlSelect =
+    "SELECT * FROM TAKECLASS as t where t.ClassId=?;";
+  db.query(sqlSelect, +[req.query.id], (err, result) => {
+    if (result.length > 0) {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
+//get the subject of teacher with id 
+app.get("/api/getteacherclass", (req, res) => {
+  const sqlSelect =
+    "SELECT * FROM CLASS as c where c.MainTeacher =?";
+  db.query(sqlSelect, +[req.query.id], (err, result) => {
+    if (result.length > 0) {
+      console.log('teacher:', result);
       res.send(result);
     }
   });

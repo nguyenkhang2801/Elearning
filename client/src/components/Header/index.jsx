@@ -68,7 +68,6 @@ const handleSubmit = (e) => {
   console.log(request); // okay
   Axios.get(`http://localhost:3001/api/login?id=${request.username}`)
     .then((result) => {
-      console.log(result.data); //okay
       localStorage.setItem("id", `${request.username}`);
     })
     .catch((error) => {
