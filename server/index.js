@@ -15,10 +15,8 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-<<<<<<< HEAD
 app.get("/api/login", (req, res) => {
   const sqlSelect = "SELECT * FROM student where StudentID=?;";
-=======
 app.get("/api/getstudentinfo", (req, res) => {
   const sqlSelect = "SELECT * FROM teacher where StudentID=?;";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
@@ -28,7 +26,6 @@ app.get("/api/getstudentinfo", (req, res) => {
 
 app.get("/api/getteacherinfo", (req, res) => {
   const sqlSelect = "SELECT * FROM teacher where TeacherId=?;";
->>>>>>> d1450f40279a7cd36cc91fa4c80c789713351e5c
   db.query(sqlSelect, +[req.query.id], (err, result) => {
     res.send(result);
   });
@@ -62,7 +59,7 @@ app.get("/api/getstudentinfo", (req, res) => {
 
 app.get("/api/getstudentclass", (req, res) => {
   const sqlSelect =
-    "SELECT t.ClassId,  c.CSubjectId,c.MainTeacher,c.CFalcility,c.CBuilding,c.CRoom,s.SubjectName,s.CollegeCredit FROM USE as u, TEXTBOOK as t, CLASS as c, SUBJECT as s where t.StudentID=? AND t.ClassId = c.ClassId AND s.SubjectId=c.CSubjectId;";
+  "SELECT t.ClassId,  c.CSubjectId,c.MainTeacher,c.CFalcility,c.CBuilding,c.CRoom,s.SubjectName,s.CollegeCredit FROM TAKECLASS as t, CLASS as c, SUBJECT as s where t.StudentID=? AND t.ClassId = c.ClassId AND s.SubjectId=c.CSubjectId;";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
     if (result.length > 0) {
       res.send(result);
