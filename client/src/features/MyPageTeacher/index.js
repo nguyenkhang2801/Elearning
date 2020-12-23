@@ -4,7 +4,7 @@ import ButtonList from "./ButtonList";
 
 MyPageTeacher.propTypes = {};
 
-function MyPageTeacher(props) {
+function MyPageTeacher() {
   const id = localStorage.getItem("id");
   console.log(id);
   const [teacherClasses, setTeacherClasses] = useState([]);
@@ -18,6 +18,7 @@ function MyPageTeacher(props) {
     );
   }, [id]);
 
+  console.log(teacherClasses);
   // const handleClickOpen = (e) => {
   //   e.stopPropagation();
   //   setOpen(true);

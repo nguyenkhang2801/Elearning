@@ -75,7 +75,7 @@ const handleSubmit = (e) => {
     });
 };
 
-export default function Header() {
+export default function Header(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -86,6 +86,7 @@ export default function Header() {
   const handleClose = () => {
     setOpen(false);
   };
+
   return (
     <div className={classes.root}>
       <AppBar position="static">
