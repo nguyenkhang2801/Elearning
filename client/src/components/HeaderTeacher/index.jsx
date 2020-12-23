@@ -66,7 +66,7 @@ const handleSubmit = (e) => {
     });
 };
 
-export default function Header(props) {
+export default function HeaderTeacher(props) {
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
 
@@ -95,16 +95,16 @@ export default function Header(props) {
             <Button color="inherit">Home</Button>
           </NavLink>
 
-          <NavLink className={classes.link} to="/mypage">
-            <Button color="inherit">My Page</Button>
+          <NavLink className={classes.link} to="/mypageTeacher">
+            <Button color="inherit">Teacher Page</Button>
           </NavLink>
 
           <NavLink className={classes.link} to="/register">
             <Button color="inherit">Register</Button>
           </NavLink>
 
-          <NavLink className={classes.link} to="/myinfo">
-            <Button color="inherit">My Info</Button>
+          <NavLink className={classes.link} to="/MyInfoTeacher">
+            <Button color="inherit">Teacher Info</Button>
           </NavLink>
 
           <a

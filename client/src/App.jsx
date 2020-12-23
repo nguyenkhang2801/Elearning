@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState } from "react";
 import "./App.scss";
 import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
@@ -15,6 +15,8 @@ import { Switch as Sw } from "@material-ui/core";
 import FormGroup from "@material-ui/core/FormGroup";
 import FormControl from "@material-ui/core/FormControl";
 import FormControlLabel from "@material-ui/core/FormControlLabel";
+import Login from "./components/Login";
+import HeaderTeacher from "./components/HeaderTeacher";
 
 function App() {
   const [state, setState] = React.useState({
@@ -26,40 +28,22 @@ function App() {
     setState({ ...state, [event.target.name]: event.target.checked });
   };
 
+  let [userRole, setUserRole] = useState(localStorage.getItem("role"));
+  let [userId, setUserId] = useState(localStorage.getItem("id"));
+  if (100 <= userId && userId <= 999) {
+    localStorage.setItem("role", "teacher");
+  } else {
+    localStorage.setItem("role", "student");
+  }
+
   return (
     <>
-      <>
-        <FormControl component="fieldset">
-          <FormGroup>
-            <FormControlLabel
-              control={
-                <Sw
-                  checked={state.student}
-                  onChange={handleChange}
-                  name="student"
-                />
-              }
-              label="student"
-            />
-            <FormControlLabel
-              control={
-                <Sw
-                  checked={state.teacher}
-                  color="primary"
-                  onChange={handleChange}
-                  name="teacher"
-                />
-              }
-              label="teacher"
-            />
-          </FormGroup>
-        </FormControl>
-      </>
+      <>{!userId && <Login />}</>
       {
         // (state.student || state.teacher) &&
         <>
-          <Header />
-
+          {userRole === "student" && <Header />}
+          {userRole === "teacher" && <HeaderTeacher />}
           <Switch>
             <Route exact path="/" component={Home} />
             <Route path="/mypage" component={MyPage} />

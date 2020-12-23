@@ -4,7 +4,7 @@ import PropTypes from "prop-types";
 Home.propTypes = {};
 
 function Home(props) {
-  return <div>Home Page</div>;
+  return <div></div>;
 }
 
 export default Home;
