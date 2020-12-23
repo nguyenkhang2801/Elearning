@@ -99,10 +99,6 @@ export default function HeaderTeacher(props) {
             <Button color="inherit">Teacher Page</Button>
           </NavLink>
 
-          <NavLink className={classes.link} to="/register">
-            <Button color="inherit">Register</Button>
-          </NavLink>
-
           <NavLink className={classes.link} to="/MyInfoTeacher">
             <Button color="inherit">Teacher Info</Button>
           </NavLink>

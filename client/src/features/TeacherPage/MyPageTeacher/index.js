@@ -14,20 +14,10 @@ function MyPageTeacher() {
     Axios.get(`http://localhost:3001/api/getteacherclass?id=${id}`).then(
       (response) => {
         setTeacherClasses(response.data); //okay
+        console.log(teacherClasses);
       }
     );
   }, [id]);
-
-  console.log(teacherClasses);
-  // const handleClickOpen = (e) => {
-  //   e.stopPropagation();
-  //   setOpen(true);
-  // };
-
-  // const handleClose = (e) => {
-  //   e.stopPropagation();
-  //   setOpen(false);
-  // };
 
   return (
     <div>

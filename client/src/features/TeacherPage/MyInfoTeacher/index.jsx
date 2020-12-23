@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Axios from "axios";
 import { Box } from "@material-ui/core";
+import CardInfo from "./CardInfo";
 
 function MyInfoTeacher() {
   const [teacherInfo, setTeacherInfo] = useState([]);
@@ -21,10 +22,7 @@ function MyInfoTeacher() {
       <ul className="teacherInfo">
         {teacherInfo.map((teacher) => (
           <li key={teacher.TeacherId}>
-            <Box>
-              Id: {teacher.TeacherId} | Name: {teacher.TeacherName} | FalcutyID:
-              {teacher.TFacultyId}
-            </Box>
+            <CardInfo teacher={teacher} />
           </li>
         ))}
       </ul>

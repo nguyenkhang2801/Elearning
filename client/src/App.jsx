@@ -2,14 +2,14 @@ import React, { useState } from "react";
 import "./App.scss";
 import { Route, Switch } from "react-router-dom";
 import Header from "./components/Header";
-import Home from "./features/Home";
-import MyPage from "./features/MyPage";
-import MyInfo from "./features/MyInfo";
-import Register from "./features/Register";
+import Home from "./features/StudentPage/Home";
+import MyPage from "./features/StudentPage/MyPage";
+import MyInfo from "./features/StudentPage/MyInfo";
+import Register from "./features/StudentPage/Register";
 import NotFound from "./components/NotFound";
 
-import MyInfoTeacher from "./features/MyInfoTeacher";
-import MyPageTeacher from "./features/MyPageTeacher";
+import MyInfoTeacher from "./features/TeacherPage/MyInfoTeacher";
+import MyPageTeacher from "./features/TeacherPage/MyPageTeacher";
 
 import { Switch as Sw } from "@material-ui/core";
 import FormGroup from "@material-ui/core/FormGroup";
@@ -40,7 +40,6 @@ function App() {
     <>
       <>{!userId && <Login />}</>
       {
-        // (state.student || state.teacher) &&
         <>
           {userRole === "student" && <Header />}
           {userRole === "teacher" && <HeaderTeacher />}
@@ -54,7 +53,7 @@ function App() {
             <Route component={NotFound} />
           </Switch>
 
-          <div style={{ textAlign: "center" }}>Created by leo with ❤️</div>
+          <div style={{ textAlign: "center" }}>Created by TEAM 1 with ❤️</div>
         </>
       }
     </>

@@ -48,7 +48,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const handleSubmit = (e) => {
-  e.preventDefault();
   let request = {
     username: document.getElementById("name").value,
     password: document.getElementById("pass").value,
@@ -61,9 +60,10 @@ const handleSubmit = (e) => {
     .then((result) => {
       localStorage.setItem("id", `${request.username}`);
       e.target.style.display = "none";
+      alert("Chào mừng đến với trang web 😜😜");
     })
     .catch((error) => {
-      console.log(error);
+      alert("Sai username hoặc password");
     });
 };
 
@@ -81,11 +81,8 @@ export default function Login(props) {
 
   return (
     <div className={classes.root}>
-      <Button variant="contained" color="secondary" onClick={handleClickOpen}>
-        Login
-      </Button>
       <Dialog
-        open={open}
+        open={true}
         onClose={handleClose}
         aria-labelledby="form-dialog-title"
         text-align="center"

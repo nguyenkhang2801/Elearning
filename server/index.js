@@ -129,11 +129,9 @@ app.get("/api/getteacherclass", (req, res) => {
 //get all the students and their informations in a class through class id
 app.get("/api/getstudentofaclass", (req, res) => {
   const sqlSelect =
-    "SELECT StudentId,SFacultyId,StudentName,Sex,Bdate,Grade,StareOfStudy from TAKECLASS,STUDENT where ClassId=?";
+    "SELECT s.StudentId,SFacultyId,StudentName,Sex,Bdate,Grade,StateOfStudy from TAKECLASS as t,STUDENT as s where ClassId=20106 AND s.StudentId=t.StudentId;";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
-    if (result.length > 0) {
-      res.send(result);
-    }
+    res.send(result);
   });
 });
 

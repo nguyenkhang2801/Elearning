@@ -60,9 +60,10 @@ const handleSubmit = (e) => {
   Axios.get(`http://localhost:3001/api/login?id=${request.username}`)
     .then((result) => {
       localStorage.setItem("id", `${request.username}`);
+      alert(`Chào mừng ${request.username} 💪💪`);
     })
     .catch((error) => {
-      console.log(error);
+      alert("sai username hoặc password");
     });
 };
 
