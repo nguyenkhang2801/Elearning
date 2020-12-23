@@ -18,16 +18,7 @@ import {
   DialogContent,
   LinearProgress,
 } from "@material-ui/core";
-import LoginForm from "../LoginForm";
 import Axios from "axios";
-
-const handleAddClick = () => {
-  return (
-    <div>
-      <LoginForm />
-    </div>
-  );
-};
 
 const session = {
   username: "",
