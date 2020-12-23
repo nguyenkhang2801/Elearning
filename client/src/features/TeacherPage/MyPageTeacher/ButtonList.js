@@ -149,7 +149,7 @@ function ButtonList(props) {
         onClick={(e) => handleRoomDetail()}
         startIcon={<ListAlt />}
       >
-        Room Detail
+        Class Detail
       </Button>
       <Dialog
         open={openRoomDetail}
