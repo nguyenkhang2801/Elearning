@@ -15,20 +15,8 @@ app.use(cors());
 app.use(express.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-<<<<<<< HEAD
-app.get("/api/login", (req, res) => {
-  const sqlSelect = "SELECT * FROM student where StudentID=?;";
-=======
-app.get("/api/getstudentinfo", (req, res) => {
-  const sqlSelect = "SELECT * FROM teacher where StudentID=?;";
-  db.query(sqlSelect, +[req.query.id], (err, result) => {
-    res.send(result);
-  });
-});
-
 app.get("/api/getteacherinfo", (req, res) => {
   const sqlSelect = "SELECT * FROM teacher where TeacherId=?;";
->>>>>>> d1450f40279a7cd36cc91fa4c80c789713351e5c
   db.query(sqlSelect, +[req.query.id], (err, result) => {
     res.send(result);
   });
@@ -38,9 +26,11 @@ app.get("/api/login", (req, res) => {
   let sqlSelect = '';
   const id = req.query.id;
   if(100 <= id && id <= 999){  
+    console.log('teacher');
     sqlSelect = "SELECT * FROM teacher where TeacherId=?;";
   }
   else {
+    console.log('student');
     sqlSelect = "SELECT * FROM student where StudentID=?;";
   }
   db.query(sqlSelect, +[id], (err, result) => {
@@ -62,8 +52,9 @@ app.get("/api/getstudentinfo", (req, res) => {
 
 app.get("/api/getstudentclass", (req, res) => {
   const sqlSelect =
-    "SELECT t.ClassId,  c.CSubjectId,c.MainTeacher,c.CFalcility,c.CBuilding,c.CRoom,s.SubjectName,s.CollegeCredit FROM USE as u, TEXTBOOK as t, CLASS as c, SUBJECT as s where t.StudentID=? AND t.ClassId = c.ClassId AND s.SubjectId=c.CSubjectId;";
+    "SELECT t.ClassId,  c.CSubjectId,c.MainTeacher,c.CFalcility,c.CBuilding,c.CRoom,s.SubjectName,s.CollegeCredit FROM `USE` as u, TEXTBOOK as t, CLASS as c, SUBJECT as s where t.StudentID=? AND t.ClassId = c.ClassId AND s.SubjectId=c.CSubjectId;";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
+    console.log(err);
     if (result.length > 0) {
       res.send(result);
     }
@@ -88,17 +79,6 @@ app.get("/api/gettextbook", (req, res) => {
   db.query(sqlSelect, +[req.query.subjectId], (err, result) => {
     if (result.length > 0) {
       console.log(result);
-      res.send(result);
-    }
-  });
-});
-
-//get the class of teacher with id 
-app.get("/api/getteacherclass", (req, res) => {
-  const sqlSelect =
-    "SELECT * FROM CLASS as c where c.MainTeacher =?";
-  db.query(sqlSelect, +[req.query.id], (err, result) => {
-    if (result.length > 0) {
       res.send(result);
     }
   });
@@ -137,11 +117,15 @@ app.get("/api/getstudentinfo", (req, res) => {
 });
 
 //get all the class that the teacher will teach through teacher ID
+
+
+//get the class of teacher with id 
 app.get("/api/getteacherclass", (req, res) => {
-  const sqlSelect = "SELECT * from CLASS where MainTeacher=?";
+  const sqlSelect =
+    "SELECT * FROM CLASS as c where c.MainTeacher =?";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
+    console.log(result);
     if (result.length > 0) {
-      console.log(result);
       res.send(result);
     }
   });
