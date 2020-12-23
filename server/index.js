@@ -52,9 +52,8 @@ app.get("/api/getstudentinfo", (req, res) => {
 
 app.get("/api/getstudentclass", (req, res) => {
   const sqlSelect =
-    "SELECT t.ClassId,  c.CSubjectId,c.MainTeacher,c.CFalcility,c.CBuilding,c.CRoom,s.SubjectName,s.CollegeCredit FROM `USE` as u, TEXTBOOK as t, CLASS as c, SUBJECT as s where t.StudentID=? AND t.ClassId = c.ClassId AND s.SubjectId=c.CSubjectId;";
+  "SELECT t.ClassId,  c.CSubjectId,c.MainTeacher,c.CFalcility,c.CBuilding,c.CRoom,s.SubjectName,s.CollegeCredit FROM TAKECLASS as t, CLASS as c, SUBJECT as s where t.StudentID=? AND t.ClassId = c.ClassId AND s.SubjectId=c.CSubjectId;";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
-    console.log(err);
     if (result.length > 0) {
       res.send(result);
     }
