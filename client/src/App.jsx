@@ -7,6 +7,9 @@ import MyInfo from "./features/MyInfo";
 import Register from "./features/Register";
 import NotFound from "./components/NotFound";
 
+import MyInfoTeacher from "./features/MyInfoTeacher";
+import MyPageTeacher from "./features/MyPageTeacher";
+
 function App() {
   return (
     <div>
@@ -15,8 +18,10 @@ function App() {
       <Switch>
         <Route exact path="/" component={Home} />
         <Route path="/mypage" component={MyPage} />
+        <Route path="/mypageTeacher" component={MyPageTeacher} />
         <Route path="/register" component={Register} />
         <Route path="/myinfo" component={MyInfo} />
+        <Route path="/MyInfoTeacher" component={MyInfoTeacher} />
         <Route component={NotFound} />
       </Switch>
 

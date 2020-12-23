@@ -11,25 +11,25 @@ import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
 import { ListAlt, ListALt } from "@material-ui/icons";
 
-import ButtonInfo from "./ButtonInfo";
+import ButtonList from "./ButtonList";
 
-MyPage.propTypes = {};
+MyPageTeacher.propTypes = {};
 
-function MyPage(props) {
+function MyPageTeacher(props) {
   const [id, setId] = useState(localStorage.getItem("id"));
   console.log(id);
-  const [studentClasses, setStudentClasses] = useState([]);
+  const [teacherClasses, setTeacherClasses] = useState([]);
   const [open, setOpen] = React.useState(false);
   //dialog handle
 
   useEffect(() => {
-    Axios.get(`http://localhost:3001/api/getstudentclass?id=${id}`).then(
+    Axios.get(`http://localhost:3001/api/getteacherclass?id=${id}`).then(
       (response) => {
-        setStudentClasses(response.data); //okay
+        setTeacherClasses(response.data); //okay
       }
     );
   }, [id]);
-  console.log(studentClasses);
+  console.log('teacher: ', teacherClasses);
 
   // const handleClickOpen = (e) => {
   //   e.stopPropagation();
@@ -43,10 +43,10 @@ function MyPage(props) {
 
   return (
     <div>
-      <ul className="studentClassInfo">
-        {studentClasses.map((studentClass) => (
-          <li key={studentClass.ClassId}>
-            <ButtonInfo studentClass={studentClass} />
+      <ul className="teacherClassInfo">
+        {teacherClasses.map((teacherClass) => (
+          <li key={teacherClass.ClassId}>
+            <ButtonList teacherClass={teacherClass} />
           </li>
         ))}
       </ul>
@@ -54,4 +54,4 @@ function MyPage(props) {
   );
 }
 
-export default MyPage;
+export default MyPageTeacher;
