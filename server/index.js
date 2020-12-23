@@ -34,9 +34,12 @@ app.get("/api/getteacherinfo", (req, res) => {
 app.get("/api/login", (req, res) => {
   let sqlSelect = "";
   const id = req.query.id;
-  if (100 <= id && id <= 999) {
+  if(100 <= id && id <= 999){  
+    console.log('teacher');
     sqlSelect = "SELECT * FROM teacher where TeacherId=?;";
-  } else {
+  }
+  else {
+    console.log('student');
     sqlSelect = "SELECT * FROM student where StudentID=?;";
   }
   db.query(sqlSelect, +[id], (err, result) => {
@@ -89,18 +92,54 @@ app.get("/api/gettextbook", (req, res) => {
   });
 });
 
+//get all class of a subject with subject id
+app.get("/api/getsubjectsearch", (req, res) => {
+  const sqlSelect =
+    "SELECT subject.SubjectId, subject.SubjectName, subject.CollegeCredit, class.ClassId,class.CFalcility,class.MainTeacher,class.NumberOfStudent,TeacherName FROM subject , class,teacher where MainTeacher= TeacherId AND class.CSubjectId=? AND subject.SubjectId = class.CSubjectId;";
+  db.query(sqlSelect, +[req.query.subjectId], (err, result) => {
+    if (result.length > 0) {
+      console.log(result);
+      res.send(result);
+    }
+  });
+});
+
+//insert student into class
+app.post("/api/insertStudentIntoClass", (req, res) => {
+  const sqlInsert =
+    "INSERT INTO TakeClass (StudentId,ClassId,SemesterId) VALUES (?,?,201);"; //lệnh đúng rồi
+  db.query(
+    sqlInsert,
+    [+req.query.studentId, +req.query.classId],
+    (err, result) => {}
+  );
+});
+
+//teacher command ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
+// select all info about teacher through teacherID
+app.get("/api/getstudentinfo", (req, res) => {
+  const sqlSelect = "SELECT * FROM TEACHER where TeacherId=?;";
+  db.query(sqlSelect, +[req.query.id], (err, result) => {
+    res.send(result);
+  });
+});
+
+//get all the class that the teacher will teach through teacher ID
+
+
 //get the class of teacher with id 
 app.get("/api/getteacherclass", (req, res) => {
   const sqlSelect = "SELECT * FROM CLASS as c where c.MainTeacher =?";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
+    console.log(result);
     if (result.length > 0) {
       res.send(result);
     }
   });
 });
 
-//get all class of a subject with subject id
-app.get("/api/getsubjectsearch", (req, res) => {
+//get all the students and their informations in a class through class id
+app.get("/api/getstudentofaclass", (req, res) => {
   const sqlSelect =
     "SELECT subject.SubjectId, subject.SubjectName, subject.CollegeCredit, class.ClassId,class.CFalcility,class.MainTeacher,class.NumberOfStudent,TeacherName FROM subject , class,teacher where MainTeacher= TeacherId AND class.CSubjectId=? AND subject.SubjectId = class.CSubjectId;";
   db.query(sqlSelect, +[req.query.subjectId], (err, result) => {

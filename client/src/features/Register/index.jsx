@@ -50,6 +50,7 @@ function Register() {
 
   useEffect(() => {
     Axios.get(`http://localhost:3001/api/getstudentclass?id=${studentId}`).then(
+      //okay
       (response) => {
         console.log("class registerd", response.data);
         setStudentClasses(response.data); //okay
