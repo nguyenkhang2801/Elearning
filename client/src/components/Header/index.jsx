@@ -48,22 +48,18 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const handleSubmit = (e) => {
-  e.preventDefault();
   let request = {
     username: document.getElementById("name").value,
     password: document.getElementById("pass").value,
   };
-  // let route = "http://localhost:3001/api/login";
-  // route += "?id=" + request.username;
-  // console.log(route);
-  console.log(request); // okay
+
   Axios.get(`http://localhost:3001/api/login?id=${request.username}`)
     .then((result) => {
+      alert(`Welcome ${request.username} 💪💪`);
       localStorage.setItem("id", `${request.username}`);
-      alert(`Chào mừng ${request.username} 💪💪`);
     })
     .catch((error) => {
-      alert("sai username hoặc password");
+      alert("Wrong username or password, please try again!!!");
     });
 };
 

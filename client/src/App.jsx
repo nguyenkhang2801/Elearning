@@ -53,7 +53,7 @@ function App() {
             <Route component={NotFound} />
           </Switch>
 
-          <div style={{ textAlign: "center" }}>Created by TEAM 1 with ❤️</div>
+          <div style={{ width: '100%', textAlign: "center", position: 'absolute', bottom: 0 }}>Created by TEAM 1 with ❤️</div>
         </>
       }
     </>
