@@ -97,7 +97,7 @@ app.get("/api/gettextbook", (req, res) => {
 // Get all textbook
 app.get("/api/getalltextbook", (req, res) => {
   const sqlSelect =
-    "SELECT * FROM `textbook` as t, `use` as u where u.UseTextBookId=t.TextBookId";
+    "SELECT * FROM `textbook`";
   db.query(sqlSelect, +[req.query.subjectId], (err, result) => {
     if (result && result.length > 0) {
       console.log('textbook: ', result);
