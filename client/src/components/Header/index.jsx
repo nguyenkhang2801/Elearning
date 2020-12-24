@@ -59,7 +59,6 @@ export default function Header(props) {
   const handleClose = () => {
     setOpen(false);
   };
-
   return (
     <div className={classes.root}>
       <AppBar position="static">

@@ -19,6 +19,8 @@ function MyPageTeacher() {
     );
   }, [id]);
 
+  console.log(teacherClasses)
+
   return (
     <div>
       <ul className="teacherClassInfo">
