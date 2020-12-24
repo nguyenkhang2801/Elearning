@@ -42,11 +42,10 @@ app.get("/api/login", (req, res) => {
 //student command ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
 //delete student from class
-app.post("/api/deletestudentclass", (req, res) => {
-  const sqlInsert =
-    "INSERT INTO TakeClass (StudentId,ClassId,SemesterId) VALUES (?,?,201);"; //lệnh đúng rồi
+app.delete("/api/deletestudentclass", (req, res) => {
+  const sqlDelete = "DELETE FROM TAKECLASS WHERE StudentId=? AND ClassId=?;";
   db.query(
-    sqlInsert,
+    sqlDelete,
     [+req.query.studentId, +req.query.classId],
     (err, result) => {}
   );
@@ -74,7 +73,8 @@ app.get("/api/getstudentclass", (req, res) => {
 
 // Get student in classId
 app.get("/api/getstudentinclass", (req, res) => {
-  const sqlSelect = "SELECT * FROM TAKECLASS as t, STUDENT as s where t.classId=? AND s.StudentId=t.StudentId;";
+  const sqlSelect =
+    "SELECT * FROM TAKECLASS as t, STUDENT as s where t.classId=? AND s.StudentId=t.StudentId;";
   db.query(sqlSelect, +[req.query.classId], (err, result) => {
     if (result && result.length > 0) {
       res.send(result);
@@ -88,7 +88,7 @@ app.get("/api/gettextbook", (req, res) => {
     "SELECT * FROM `use`, `textbook` where use.UseSubjectId=? AND use.UseTextBookId=textbook.TextBookId;";
   db.query(sqlSelect, +[req.query.subjectId], (err, result) => {
     if (result && result.length > 0) {
-      console.log('textbook: ', result);
+      console.log("textbook: ", result);
       res.send(result);
     }
   });
@@ -100,7 +100,7 @@ app.get("/api/getsubjectsearch", (req, res) => {
     "SELECT subject.SubjectId, subject.SubjectName, subject.CollegeCredit, class.ClassId,class.CFalcility,class.MainTeacher,class.NumberOfStudent,TeacherName FROM subject , class,teacher where MainTeacher= TeacherId AND class.CSubjectId=? AND subject.SubjectId = class.CSubjectId;";
   db.query(sqlSelect, +[req.query.subjectId], (err, result) => {
     if (result && result.length > 0) {
-      console.log('subjectSearch: ', result);
+      console.log("subjectSearch: ", result);
       res.send(result);
     }
   });
@@ -130,7 +130,8 @@ app.get("/api/getstudentinfo", (req, res) => {
 
 //get the class of teacher with id
 app.get("/api/getteacherclass", (req, res) => {
-  const sqlSelect = "SELECT * FROM CLASS as c, SUBJECT as s where c.MainTeacher =? AND c.CSubjectId=s.SubjectId";
+  const sqlSelect =
+    "SELECT * FROM CLASS as c, SUBJECT as s where c.MainTeacher =? AND c.CSubjectId=s.SubjectId";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
     console.log(result);
     if (result && result.length > 0) {

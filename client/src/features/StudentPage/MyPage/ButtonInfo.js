@@ -22,11 +22,14 @@ function ButtonInfo(props) {
   };
 
   const handleClickDelete = (e) => {
+    alert("Are you sure to delete this subject? 😂😂");
     Axios.delete(
       `http://localhost:3001/api/deletestudentclass?classId=${
         studentClass.ClassId
       }&studentId=${localStorage.getItem("id")}`
-    ).then(console.log("delete success"));
+    );
+    alert("delete success");
+    window.location.reload();
   };
   return (
     <Box>

@@ -62,16 +62,15 @@ function Register() {
     e.preventDefault();
     //check if subject has registered
     if (studentClasses.some((x) => x.CSubjectId === subjectId)) {
-      alert("You've already register this subject");
+      alert("You've already registered this subject");
       return;
     }
     //insert into db
     if (classIdChoose !== -1) {
       Axios.post(
         `http://localhost:3001/api/insertStudentIntoClass?studentId=${studentId}&classId=${classIdChoose}`
-      ).then(() => {
-        alert("successful insert");
-      });
+      );
+      alert("successful insert");
     }
   };
 

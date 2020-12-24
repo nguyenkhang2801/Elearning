@@ -11,7 +11,7 @@ import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Login from '../Login'
+import Login from "../Login";
 import {
   Button,
   Container,
@@ -118,7 +118,7 @@ export default function Header(props) {
               onClose={handleClose}
               aria-labelledby="form-dialog-title"
             >
-              <Login isOpen={open}/>
+              <Login isOpen={open} />
             </Dialog>
           </Box>
         </Toolbar>
