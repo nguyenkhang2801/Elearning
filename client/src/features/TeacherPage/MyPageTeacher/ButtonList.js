@@ -8,6 +8,7 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Paper from '@material-ui/core/Paper';
 import { Box } from "@material-ui/core";
 import { ListAlt } from "@material-ui/icons";
 import { PostAdd } from "@material-ui/icons";
@@ -56,6 +57,8 @@ function ButtonList(props) {
   const [allTextBook, setAllTextBook] = useState([]);
   const [isAdd, setAdd] = useState(false);
 
+  console.log('class: ', teacherClass)
+
   useEffect(() => {
     Axios.get(`http://localhost:3001/api/getalltextbook`).then(
       (response) => {
@@ -97,7 +100,6 @@ function ButtonList(props) {
     setOpenTextBook(!openTextBook);
     Axios.get(`http://localhost:3001/api/gettextbook?subjectId=${teacherClass.CSubjectId}`).then(
       (response) => {
-        console.log('book: ', response.data)
         setTextBookList(response.data); //okay
       }
     );
@@ -133,7 +135,7 @@ function ButtonList(props) {
       <div style={{display: 'flex', flexDirection: 'row', borderBottom: '1px solid'}}>
         <Box >
           <DialogContentText>
-            <h2> {teacherClass.SubjectName} </h2>
+            <h2> {book.TextBookName} </h2>
           </DialogContentText>
           <DialogContentText>
             Subject Id: {book.UseSubjectId}
@@ -149,14 +151,14 @@ function ButtonList(props) {
           </DialogContentText>
         </Box>
         <Button
-            variant="contained"
-            color="secondary"
-            style={{position: 'absolute', right: '10%', marginTop: '20%'}}
-            onClick={(e) => handleDeleteTextBook(book.TextBookId)}
-            startIcon={<DeleteForever />}
-          >
-            Delete
-          </Button>
+          variant="contained"
+          color="secondary"
+          style={{position: 'absolute', right: '10%', marginTop: '20%'}}
+          onClick={(e) => handleDeleteTextBook(book.TextBookId)}
+          startIcon={<DeleteForever />}
+        >
+          Delete
+        </Button>
       </div>
     );
   }
@@ -185,7 +187,7 @@ function ButtonList(props) {
           <Button
             variant="contained"
             color="secondary"
-            onClick={(e) => handleAdd()}
+            onClick={(e) => handleAdd(state.name)}
             startIcon={<PostAdd />}
           >
             ADD Textbook
@@ -195,11 +197,14 @@ function ButtonList(props) {
     )
   }
 
-  function handleAdd(subjectId, textbookId){
+  function handleAdd(bookName){
+    const bookAdding = allTextBook.filter(book => book.TextBookName === bookName)[0];
+    console.log('book: ', bookAdding);
     Axios.post(
-      `http://localhost:3001/api/addTextbook?subjectId=${subjectId}&&textbookId=${textbookId}`
+      `http://localhost:3001/api/addTextbook?subjectId=${teacherClass.CSubjectId}&&textbookId=${bookAdding.TextBookId}`
     ).then(() => {
-      alert("successful insert");
+      setAdd(false);
+      console.log('Add Book Successfully')
     });
   }
 
@@ -207,10 +212,9 @@ function ButtonList(props) {
     Axios.post(
       `http://localhost:3001/api/deleteTextbook?textbookId=${textbookId}`
     ).then(() => {
-      alert("successful delete");
+      console.log("Delete Successfully");
+      handleTextBook();
     });
-
-    handleTextBook();
   }
 
   return (
