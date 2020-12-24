@@ -1,33 +1,33 @@
-import React from "react";
-import { makeStyles, useTheme } from "@material-ui/core/styles";
-import Card from "@material-ui/core/Card";
-import CardContent from "@material-ui/core/CardContent";
-import CardMedia from "@material-ui/core/CardMedia";
-import Typography from "@material-ui/core/Typography";
+import React from 'react';
+import { makeStyles, useTheme } from '@material-ui/core/styles';
+import Card from '@material-ui/core/Card';
+import CardContent from '@material-ui/core/CardContent';
+import CardMedia from '@material-ui/core/CardMedia';
+import Typography from '@material-ui/core/Typography';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    display: "flex",
-    justifyContent: "center",
-    alignSelf: "center",
-    marginLeft: "30vw",
-    marginRight: "30vw",
+    display: 'flex',
+    justifyContent: 'center',
+    alignSelf: 'center',
+    marginLeft: '30vw',
+    marginRight: '30vw',
   },
   details: {
-    display: "flex",
-    alignSelf: "center",
-    flexDirection: "column",
-    height: 150,
+    display: 'flex',
+    alignSelf: 'center',
+    flexDirection: 'column',
+    height: 150, 
   },
   content: {
-    flex: "1 0 auto",
+    flex: '1 0 auto',
   },
   cover: {
-    width: 200,
+    width: 151,
   },
   controls: {
-    display: "flex",
-    alignItems: "center",
+    display: 'flex',
+    alignItems: 'center',
     paddingLeft: theme.spacing(1),
     paddingBottom: theme.spacing(1),
   },

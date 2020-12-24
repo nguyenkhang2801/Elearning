@@ -11,6 +11,7 @@ import TextField from "@material-ui/core/TextField";
 import DialogActions from "@material-ui/core/DialogActions";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
+import Login from '../Login'
 import {
   Button,
   Container,
@@ -46,26 +47,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: 15,
   },
 }));
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-  let request = {
-    username: document.getElementById("name").value,
-    password: document.getElementById("pass").value,
-  };
-  // let route = "http://localhost:3001/api/login";
-  // route += "?id=" + request.username;
-  // console.log(route);
-  console.log(request); // okay
-  Axios.get(`http://localhost:3001/api/login?id=${request.username}`)
-    .then((result) => {
-      localStorage.setItem("id", `${request.username}`);
-      alert(`Chào mừng ${request.username} 💪💪`);
-    })
-    .catch((error) => {
-      alert("sai username hoặc password");
-    });
-};
 
 export default function Header(props) {
   const classes = useStyles();
@@ -137,35 +118,7 @@ export default function Header(props) {
               onClose={handleClose}
               aria-labelledby="form-dialog-title"
             >
-              <form onSubmit={(e) => handleSubmit(e)}>
-                <DialogTitle id="form-dialog-title">Sign in</DialogTitle>
-
-                <DialogContent>
-                  <DialogContentText>
-                    To get into this website, must be sign in first
-                  </DialogContentText>
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Username"
-                    type="text"
-                    fullWidth
-                  />
-                  <TextField
-                    margin="dense"
-                    id="pass"
-                    label="Password"
-                    type="password"
-                    fullWidth
-                  />
-                </DialogContent>
-                <DialogActions>
-                  <Button type="submit" onClick={handleClose} color="primary">
-                    Log in
-                  </Button>
-                </DialogActions>
-              </form>
+              <Login isOpen={open}/>
             </Dialog>
           </Box>
         </Toolbar>

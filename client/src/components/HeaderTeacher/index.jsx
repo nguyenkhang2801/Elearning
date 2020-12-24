@@ -3,27 +3,14 @@ import IconButton from "@material-ui/core/IconButton";
 import { makeStyles } from "@material-ui/core/styles";
 import Toolbar from "@material-ui/core/Toolbar";
 import MenuIcon from "@material-ui/icons/Menu";
-import React, { Component, useEffect } from "react";
+import React from "react";
 import Box from "@material-ui/core/Box";
-import { Add, Input } from "@material-ui/icons";
 import { NavLink } from "react-router-dom";
-import TextField from "@material-ui/core/TextField";
-import DialogActions from "@material-ui/core/DialogActions";
-import DialogContentText from "@material-ui/core/DialogContentText";
-import DialogTitle from "@material-ui/core/DialogTitle";
+import Login from '../Login'
 import {
   Button,
-  Container,
   Dialog,
-  DialogContent,
-  LinearProgress,
 } from "@material-ui/core";
-import Axios from "axios";
-
-const session = {
-  username: "",
-  password: NaN,
-};
 
 const useStyles = makeStyles((theme) => ({
   root: {
@@ -46,25 +33,6 @@ const useStyles = makeStyles((theme) => ({
     bottom: 15,
   },
 }));
-
-const handleSubmit = (e) => {
-  e.preventDefault();
-  let request = {
-    username: document.getElementById("name").value,
-    password: document.getElementById("pass").value,
-  };
-  // let route = "http://localhost:3001/api/login";
-  // route += "?id=" + request.username;
-  // console.log(route);
-  console.log(request); // okay
-  Axios.get(`http://localhost:3001/api/login?id=${request.username}`)
-    .then((result) => {
-      localStorage.setItem("id", `${request.username}`);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-};
 
 export default function HeaderTeacher(props) {
   const classes = useStyles();
@@ -132,35 +100,7 @@ export default function HeaderTeacher(props) {
               onClose={handleClose}
               aria-labelledby="form-dialog-title"
             >
-              <form onSubmit={(e) => handleSubmit(e)}>
-                <DialogTitle id="form-dialog-title">Sign in</DialogTitle>
-
-                <DialogContent>
-                  <DialogContentText>
-                    To get into this website, must be sign in first
-                  </DialogContentText>
-                  <TextField
-                    autoFocus
-                    margin="dense"
-                    id="name"
-                    label="Username"
-                    type="text"
-                    fullWidth
-                  />
-                  <TextField
-                    margin="dense"
-                    id="pass"
-                    label="Password"
-                    type="password"
-                    fullWidth
-                  />
-                </DialogContent>
-                <DialogActions>
-                  <Button type="submit" onClick={handleClose} color="primary">
-                    Log in
-                  </Button>
-                </DialogActions>
-              </form>
+              <Login isOpen={open}/>
             </Dialog>
           </Box>
         </Toolbar>

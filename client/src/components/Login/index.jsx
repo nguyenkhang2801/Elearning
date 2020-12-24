@@ -20,11 +20,6 @@ import {
 } from "@material-ui/core";
 import Axios from "axios";
 
-const session = {
-  username: "",
-  password: NaN,
-};
-
 const useStyles = makeStyles((theme) => ({
   root: {
     flexGrow: 1,
@@ -48,6 +43,7 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const handleSubmit = (e) => {
+  e.preventDefault();
   let request = {
     username: document.getElementById("name").value,
     password: document.getElementById("pass").value,
@@ -58,22 +54,22 @@ const handleSubmit = (e) => {
   console.log(request); // okay
   Axios.get(`http://localhost:3001/api/login?id=${request.username}`)
     .then((result) => {
+      if (100 <= request.username && request.username <= 999) {
+        localStorage.setItem("role", "teacher");
+      } else if (1500000 <= request.username && request.username <= 2100000) {
+        localStorage.setItem("role", "student");
+      }
       localStorage.setItem("id", `${request.username}`);
-      e.target.style.display = "none";
-      alert("Chào mừng đến với trang web 😜😜");
+      return document.location.href="/";
     })
     .catch((error) => {
-      alert("Sai username hoặc password");
+      alert("Wrong username or password, please try again!!!");
     });
 };
 
 export default function Login(props) {
   const classes = useStyles();
-  const [open, setOpen] = React.useState(false);
-
-  const handleClickOpen = () => {
-    setOpen(true);
-  };
+  const [open, setOpen] = React.useState(props.isOpen);
 
   const handleClose = () => {
     setOpen(false);
@@ -113,7 +109,7 @@ export default function Login(props) {
           <DialogActions>
             <Button
               type="submit"
-              onClick={handleClose}
+              onClick={handleSubmit}
               color="primary"
               display="inline-block"
             >

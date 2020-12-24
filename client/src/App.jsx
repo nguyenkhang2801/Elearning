@@ -19,26 +19,12 @@ import Login from "./components/Login";
 import HeaderTeacher from "./components/HeaderTeacher";
 
 function App() {
-  const [state, setState] = React.useState({
-    student: false,
-    teacher: false,
-  });
-
-  const handleChange = (event) => {
-    setState({ ...state, [event.target.name]: event.target.checked });
-  };
-
-  let [userRole, setUserRole] = useState(localStorage.getItem("role"));
-  let [userId, setUserId] = useState(localStorage.getItem("id"));
-  if (100 <= userId && userId <= 999) {
-    localStorage.setItem("role", "teacher");
-  } else {
-    localStorage.setItem("role", "student");
-  }
+  let [userRole, setRole] = useState(localStorage.getItem("role"));
+  let userId = localStorage.getItem("id");
 
   return (
     <>
-      <>{!userId && <Login />}</>
+      <>{!userId && <Login isOpen={true}/>}</>
       {
         <>
           {userRole === "student" && <Header />}
@@ -53,7 +39,7 @@ function App() {
             <Route component={NotFound} />
           </Switch>
 
-          <div style={{ textAlign: "center" }}>Created by TEAM 1 with ❤️</div>
+          <div style={{ width: '100%', textAlign: "center", position: 'absolute', bottom: 0 }}>Created by TEAM 1 with ❤️</div>
         </>
       }
     </>

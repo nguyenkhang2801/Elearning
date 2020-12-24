@@ -19,7 +19,7 @@ function MyInfoTeacher() {
   return (
     <div className="App">
       <h1>Teacher Info</h1>
-      <ul className="teacherInfo">
+      <ul className="teacherInfo" style={{listStyle: 'none'}}>
         {teacherInfo.map((teacher) => (
           <li key={teacher.TeacherId}>
             <CardInfo teacher={teacher} />

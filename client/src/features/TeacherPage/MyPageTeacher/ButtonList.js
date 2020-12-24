@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import Axios from "axios";
-import TableStudent from "./TableStudent";
+import TableStudent from './TableStudent'
 
 import Button from "@material-ui/core/Button";
 import Dialog from "@material-ui/core/Dialog";
@@ -8,18 +8,18 @@ import DialogActions from "@material-ui/core/DialogActions";
 import DialogContent from "@material-ui/core/DialogContent";
 import DialogContentText from "@material-ui/core/DialogContentText";
 import DialogTitle from "@material-ui/core/DialogTitle";
-import Paper from "@material-ui/core/Paper";
+import Paper from '@material-ui/core/Paper';
 import { Box } from "@material-ui/core";
 import { ListAlt } from "@material-ui/icons";
-import { makeStyles } from "@material-ui/core/styles";
+import { makeStyles } from '@material-ui/core/styles';
 
 const useStyles = makeStyles((theme) => ({
   root: {
-    flexGrow: 1,
+    flexGrow: 1
   },
   paper: {
     padding: theme.spacing(3),
-    textAlign: "center",
+    textAlign: 'center',
     color: theme.palette.text.secondary,
   },
 }));
@@ -38,14 +38,14 @@ function ButtonList(props) {
   const classes = useStyles();
 
   const handleClose = (name) => {
-    switch (name) {
-      case "StudentList":
+    switch(name){
+      case 'StudentList':
         setOpenStudentList(false);
         break;
-      case "RoomDetail":
+      case 'RoomDetail':
         setOpenRoomDetail(false);
         break;
-      case "TextBook":
+      case 'TextBook':
         setOpenTextBook(false);
         break;
       default:
@@ -55,32 +55,33 @@ function ButtonList(props) {
 
   function handleStudentList() {
     setOpenStudentList(!openStudentList);
-    Axios.get(
-      `http://localhost:3001/api/getstudentofaclass?id=${teacherClass.ClassId}`
-    ).then((response) => {
-      setStudentList(response.data);
-      console.log(response); //okay
-    });
-  }
+    Axios.get(`http://localhost:3001/api/getstudentinclass?classId=${teacherClass.ClassId}`).then(
+      (response) => {
+        setStudentList(response.data); //okay
+      }
+    );
+  };
 
   function handleRoomDetail() {
     setOpenRoomDetail(!openRoomDetail);
-  }
+  };
 
   function handleTextBook() {
     setOpenTextBook(!openTextBook);
-    Axios.get(
-      `http://localhost:3001/api/gettextbook?subjectId=${teacherClass.CSubjectId}`
-    ).then((response) => {
-      console.log("book: ", response.data);
-      setTextBookList(response.data); //okay
-    });
-  }
+    Axios.get(`http://localhost:3001/api/gettextbook?subjectId=${teacherClass.CSubjectId}`).then(
+      (response) => {
+        console.log('book: ', response.data)
+        setTextBookList(response.data); //okay
+      }
+    );
+  };
 
-  function renderRoomDetail() {
-    return (
+  function renderRoomDetail(){
+    return(
       <Box>
-        <DialogContentText>Class Id: {roomDetail.ClassId}</DialogContentText>
+        <DialogContentText>
+          Class Id: {roomDetail.ClassId}
+        </DialogContentText>
         <DialogContentText>
           Subject Id: {roomDetail.CSubjectId}
         </DialogContentText>
@@ -94,32 +95,38 @@ function ButtonList(props) {
           Falcility: {roomDetail.CFalcility}
         </DialogContentText>
         <DialogContentText>
-          Room: {roomDetail.CRoom}
-          {roomDetail.CBuilding}
+          Room: {roomDetail.CRoom}{roomDetail.CBuilding}
         </DialogContentText>
       </Box>
     );
   }
 
-  function renderTextBook(book) {
-    return (
+  function renderTextBook(book){
+    return(
       <Box>
-        <DialogContentText>Subject Id: {book.UseSubjectId}</DialogContentText>
-        <DialogContentText>TextBook Id: {book.UseTextBookId}</DialogContentText>
+        <DialogContentText>
+          Subject Id: {book.UseSubjectId}
+        </DialogContentText>
+        <DialogContentText>
+          TextBook Id: {book.UseTextBookId}
+        </DialogContentText>
         <DialogContentText>
           TextBook Name: {book.TextBookName}
         </DialogContentText>
-        <DialogContentText>Released: {book.YearOfRelease}</DialogContentText>
+        <DialogContentText>
+          Released: {book.YearOfRelease}
+        </DialogContentText>
       </Box>
     );
   }
 
   return (
     <Box>
+      <h2>{teacherClass.SubjectName} - {teacherClass.CRoom}{teacherClass.CBuilding} </h2>
       <Button
         variant="contained"
         color="secondary"
-        style={{ marginRight: 20 }}
+        style={{marginRight: 20}}
         onClick={(e) => handleStudentList()}
         startIcon={<ListAlt />}
       >
@@ -129,14 +136,16 @@ function ButtonList(props) {
         open={openStudentList}
         aria-labelledby="form-dialog-title"
         fullWidth={true}
-        maxWidth={"lg"}
+        maxWidth={'lg'}
       >
-        <DialogTitle id="form-dialog-title">Student List</DialogTitle>
+        <DialogTitle id="form-dialog-title">
+          Student List
+        </DialogTitle>
         <DialogContent>
           {<TableStudent studentList={studentList} />}
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleClose("StudentList")} color="primary">
+          <Button onClick={() => handleClose('StudentList')} color="primary">
             Cancel
           </Button>
         </DialogActions>
@@ -145,25 +154,27 @@ function ButtonList(props) {
       <Button
         variant="contained"
         color="secondary"
-        style={{ marginRight: 20 }}
+        style={{marginRight: 20}}
         onClick={(e) => handleRoomDetail()}
         startIcon={<ListAlt />}
       >
-        Class Detail
+        Room Detail
       </Button>
       <Dialog
         open={openRoomDetail}
-        onClose={(e) => handleClose("RoomDetail")}
+        onClose={(e) => handleClose('RoomDetail')}
         aria-labelledby="form-dialog-title"
         fullWidth={true}
-        maxWidth={"xs"}
+        maxWidth={'xs'}
       >
         <DialogTitle id="form-dialog-title">
           {teacherClass.SubjectName}
         </DialogTitle>
-        <DialogContent>{renderRoomDetail()}</DialogContent>
+        <DialogContent>
+          {renderRoomDetail()}
+        </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleClose("RoomDetail")} color="primary">
+          <Button onClick={() => handleClose('RoomDetail')} color="primary">
             Cancel
           </Button>
         </DialogActions>
@@ -179,17 +190,17 @@ function ButtonList(props) {
       </Button>
       <Dialog
         open={openTextBook}
-        onClose={(e) => handleClose("TextBook")}
+        onClose={(e) => handleClose('TextBook')}
         aria-labelledby="form-dialog-title"
       >
         <DialogTitle id="form-dialog-title">
           {teacherClass.SubjectName}
         </DialogTitle>
         <DialogContent>
-          {textBookList.map((book) => renderTextBook(book))}
+          { textBookList.map(book => renderTextBook(book)) }
         </DialogContent>
         <DialogActions>
-          <Button onClick={() => handleClose("TextBook")} color="primary">
+          <Button onClick={() => handleClose('TextBook')} color="primary">
             Cancel
           </Button>
         </DialogActions>
@@ -199,3 +210,4 @@ function ButtonList(props) {
 }
 
 export default ButtonList;
+
