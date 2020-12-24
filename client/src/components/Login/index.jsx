@@ -60,7 +60,7 @@ const handleSubmit = (e) => {
         localStorage.setItem("role", "student");
       }
       localStorage.setItem("id", `${request.username}`);
-      return document.location.href="/";
+      return (document.location.href = "/");
     })
     .catch((error) => {
       alert("Wrong username or password, please try again!!!");
