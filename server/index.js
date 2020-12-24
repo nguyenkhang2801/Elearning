@@ -94,6 +94,18 @@ app.get("/api/gettextbook", (req, res) => {
   });
 });
 
+// Get all textbook
+app.get("/api/getalltextbook", (req, res) => {
+  const sqlSelect =
+    "SELECT * FROM `textbook`";
+  db.query(sqlSelect, +[req.query.subjectId], (err, result) => {
+    if (result && result.length > 0) {
+      console.log('textbook: ', result);
+      res.send(result);
+    }
+  });
+});
+
 //get all class of a subject with subject id
 app.get("/api/getsubjectsearch", (req, res) => {
   const sqlSelect =
@@ -119,7 +131,7 @@ app.post("/api/insertStudentIntoClass", (req, res) => {
 
 //teacher command ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // select all info about teacher through teacherID
-app.get("/api/getstudentinfo", (req, res) => {
+app.get("/api/getteacherinfo", (req, res) => {
   const sqlSelect = "SELECT * FROM TEACHER where TeacherId=?;";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
     res.send(result);
@@ -144,6 +156,24 @@ app.get("/api/getstudentofaclass", (req, res) => {
   const sqlSelect =
     "SELECT s.StudentId,SFacultyId,StudentName,Sex,Bdate,Grade,StateOfStudy from TAKECLASS as t,STUDENT as s where ClassId=? AND s.StudentId=t.StudentId;";
   db.query(sqlSelect, +[req.query.id], (err, result) => {
+    res.send(result);
+  });
+});
+
+// delete textbook with textbookId
+app.post("/api/deleteTextbook", (req, res) => {
+  const sqlSelect =
+    "DELETE FROM `use` WHERE UseTextBookId=?";
+  db.query(sqlSelect, +[req.query.textbookId], (err, result) => {
+    res.send(result);
+  });
+});
+
+// delete textbook with textbookId
+app.post("/api/addTextbook", (req, res) => {
+  const sqlSelect =
+    "INSERT INTO `use` (UseSubjectId, UseTextBookId) VALUES (?, ?);";
+  db.query(sqlSelect, [ +req.query.subjectId, +req.query.textbookId], (err, result) => {
     res.send(result);
   });
 });

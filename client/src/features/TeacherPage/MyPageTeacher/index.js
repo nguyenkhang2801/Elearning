@@ -14,10 +14,11 @@ function MyPageTeacher() {
     Axios.get(`http://localhost:3001/api/getteacherclass?id=${id}`).then(
       (response) => {
         setTeacherClasses(response.data); //okay
-        console.log(teacherClasses)
       }
     );
   }, [id]);
+
+  console.log(teacherClasses)
 
   return (
     <div>
