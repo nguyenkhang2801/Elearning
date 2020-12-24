@@ -41,6 +41,19 @@ app.get("/api/login", (req, res) => {
 
 //student command ++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 
+//delete student from class
+app.post("/api/deletestudentclass", (req, res) => {
+  const sqlInsert =
+    "INSERT INTO TakeClass (StudentId,ClassId,SemesterId) VALUES (?,?,201);"; //lệnh đúng rồi
+  db.query(
+    sqlInsert,
+    [+req.query.studentId, +req.query.classId],
+    (err, result) => {}
+  );
+});
+
+//get student info through id
+
 app.get("/api/getstudentinfo", (req, res) => {
   const sqlSelect = "SELECT * FROM student where StudentID=?;";
   db.query(sqlSelect, [+req.query.id], (err, result) => {
