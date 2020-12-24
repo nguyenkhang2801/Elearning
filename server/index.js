@@ -117,17 +117,6 @@ app.post("/api/insertStudentIntoClass", (req, res) => {
   );
 });
 
-//insert student into subject
-app.post("/api/insertStudentIntoSubject", (req, res) => {
-  const sqlInsert =
-    "INSERT INTO Registers (RStudentId,RSubjectId,RSemesterId) VALUES (?,?,201);"; //lệnh đúng rồi
-  db.query(
-    sqlInsert,
-    [+req.query.studentId, +req.query.subjectId],
-    (err, result) => {}
-  );
-});
-
 //teacher command ++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++++
 // select all info about teacher through teacherID
 app.get("/api/getstudentinfo", (req, res) => {
